@@ -19,4 +19,10 @@ def login_root(request):
             # Login Failed
             return HttpRepsonseRedirect(reverse('login.views.login_fail'))
           
+        return render(request, 'login_root.html')
+
+    def login_success(request):
         return render(request, 'login_success.html')
+    
+    def login_fail(request):
+        return render(request, 'login_fail.html')
