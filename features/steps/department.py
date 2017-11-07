@@ -14,3 +14,12 @@ def step_impl(context):
         context.model = companyModel()
     for row in context.table:
         context.model.add_user(row["name"], department=row["department"])
+        
+@when('we count the number of people in each department')
+def step_impl(context):
+    context.model.count_persons_per_department()
+    
+@then('we will find {count} people in "{deparment}"')
+def step_impl(context, count, department):
+    count_ = NamedNumber.from_string(count)
+    assert_that(count_, equal_to(context.model.get_headcount_for(department)))
